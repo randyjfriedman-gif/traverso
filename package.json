@@ -1,0 +1,12 @@
+{
+  "name": "traverso-vc-csv-generator",
+  "version": "1.0.0",
+  "description": "VC Database CSV Generator for Traverso",
+  "type": "module",
+  "scripts": {
+    "generate": "node csv-generator-tool.js"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

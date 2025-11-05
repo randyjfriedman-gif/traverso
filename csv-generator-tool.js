@@ -1,11 +1,12 @@
 // COMPLETE VC DATABASE CSV GENERATOR
-// Copy this entire code into Claude's analysis tool to generate the full CSV file
+// Node.js version - generates CSV from Excel file
 
 import * as XLSX from 'xlsx';
+import { readFileSync, writeFileSync } from 'fs';
 
 // Read original Excel file
-const response = await window.fs.readFile('traverso_vc_tracking_master_sheet.xlsx');
-const workbook = XLSX.read(response);
+const fileBuffer = readFileSync('traverso_vc_tracking_master_sheet.xlsx');
+const workbook = XLSX.read(fileBuffer);
 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 const existingVCs = XLSX.utils.sheet_to_json(worksheet);
 
@@ -179,8 +180,10 @@ completeData.forEach(row => {
     csv += values.join(',') + '\n';
 });
 
+// Save CSV to file
+writeFileSync('traverso_vc_database_complete.csv', csv);
+
 console.log('✅ COMPLETE CSV GENERATED');
 console.log(`📊 ${completeData.length} VCs with full messaging`);
 console.log(`📄 File size: ${csv.length} characters`);
-console.log('\n==== COPY CSV BELOW THIS LINE ====\n');
-console.log(csv);
+console.log(`💾 Saved to: traverso_vc_database_complete.csv`);
